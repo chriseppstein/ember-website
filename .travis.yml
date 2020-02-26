@@ -1,7 +1,7 @@
 ---
 language: node_js
 node_js:
-  - "8"
+  - "10"
 
 sudo: false
 dist: trusty
@@ -13,6 +13,9 @@ branches:
 
 addons:
   chrome: stable
+
+before_install:
+  - npm install -g @lhci/cli@0.3.x
 
 cache:
   directories:
@@ -29,3 +32,5 @@ script:
   - npm run lint:js
   - npm run build --environment production
   - npm test
+  - npx ember build -prod
+  - lhci autorun
